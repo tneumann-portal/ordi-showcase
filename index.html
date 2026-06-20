@@ -546,7 +546,7 @@
     };
     var fontFamily = fontMap[el.dataset.font] || fontMap.classic;
     card.querySelectorAll('.preview-font-text').forEach(e => {
-      e.style.fontFamily = fontFamily;
+      e.setAttribute('style', e.getAttribute('style').replace(/font-family:[^;]+;?/, '') + ';font-family:' + fontFamily);
     });
   }
 
