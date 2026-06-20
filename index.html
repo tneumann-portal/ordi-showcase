@@ -506,6 +506,10 @@
     _state[tpl].color = el.dataset.color;
     _selectedColor = el.dataset.color;
     if (tpl === 'classic') updatePreview();
+    // Update preview elements within this card
+    card.querySelectorAll('[style*="background:#b85c6e"]').forEach(e => {
+      e.style.background = el.dataset.color;
+    });
     // Update font btn colors
     card.querySelectorAll('.font-btn.active').forEach(b => {
       b.style.border = '1px solid ' + el.dataset.color;
