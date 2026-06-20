@@ -331,7 +331,7 @@
     <!-- MINIMAL -->
     <div class="template-card" data-template="minimal">
       <div class="template-preview preview-minimal" style="background:#faf8f6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:20px">
-        <div style="font-family:'DM Serif Display',serif;font-size:22px;color:#1a1614;text-align:center;line-height:1.1">Frauenheilkunde<br><em class="preview-accent-text" style="color:#b85c6e">mit Herz.</em></div>
+        <div class="preview-font-text" style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#1a1614;text-align:center;line-height:1.1">Frauenheilkunde<br><em class="preview-accent-text" style="color:#b85c6e">mit Herz.</em></div>
         <div style="width:40px;height:1px;background:#ede8e4"></div>
         <div style="font-size:9px;color:#9a8e8a;letter-spacing:0.15em;text-transform:uppercase">Gynäkologie · Wien</div>
         <div class="preview-accent-bg" style="width:70px;height:20px;background:#b85c6e;border-radius:1px;margin-top:4px"></div>
@@ -380,7 +380,7 @@
     <div class="template-card" data-template="warm" style="cursor:default">
       <div class="template-preview" style="background:linear-gradient(135deg,#faf6f0 0%,#e8dcc8 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px">
         <div style="width:100%;background:rgba(255,255,255,0.7);border-radius:12px;padding:14px;border:1px solid #e2d5c4">
-          <div style="font-family:'Lora',serif;font-size:13px;font-style:italic;color:#2e2620;margin-bottom:6px">Ordination <em class="preview-accent-text" style="color:#b85c6e">Dr. Neumann</em></div>
+          <div class="preview-font-text" style="font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:#2e2620;margin-bottom:6px">Ordination <em class="preview-accent-text" style="color:#b85c6e">Dr. Neumann</em></div>
           <div class="preview-accent-bg" style="width:60%;height:4px;background:#b85c6e;border-radius:2px;margin-bottom:8px"></div>
           <div style="font-size:8px;color:#a89990;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px">Gynäkologie · Wien</div>
           <div class="preview-accent-bg" style="width:80px;height:22px;background:#b85c6e;border-radius:12px"></div>
@@ -538,6 +538,16 @@
     _state[tpl].font = el.dataset.font;
     _selectedFont = el.dataset.font;
     if (tpl === 'classic') updatePreview();
+    // Update font preview text in this card
+    var fontMap = {
+      classic: "'Cormorant Garamond', serif",
+      modern:  "'Playfair Display', serif",
+      clean:   "'Libre Baskerville', serif"
+    };
+    var fontFamily = fontMap[el.dataset.font] || fontMap.classic;
+    card.querySelectorAll('.preview-font-text').forEach(e => {
+      e.style.fontFamily = fontFamily;
+    });
   }
 
   function updatePreview() {
