@@ -324,7 +324,7 @@
       </div>
       <div class="template-footer">
         <span class="template-status">Verfügbar</span>
-        <a href="#" id="demo-link" class="template-btn" target="_blank" rel="noopener noreferrer" onclick="openDemo()">Demo ansehen →</a>
+        <a href="#" id="demo-link" class="template-btn" target="_blank" rel="noopener noreferrer" onclick="openDemo('classic')">Demo ansehen →</a>
       </div>
     </div>
 
@@ -348,7 +348,7 @@
       </div>
       <div class="template-footer">
         <span class="template-status">Verfügbar</span>
-        <a href="https://ordi-minimal.onrender.com" class="template-btn" target="_blank" rel="noopener noreferrer">Demo ansehen →</a>
+        <a href="#" class="template-btn" onclick="openDemo('minimal');return false;">Demo ansehen →</a>
       </div>
     </div>
 
@@ -386,7 +386,7 @@
       </div>
       <div class="template-footer">
         <span class="template-status">Verfügbar</span>
-        <a href="https://ordi-bold.onrender.com" class="template-btn" target="_blank" rel="noopener noreferrer">Demo ansehen →</a>
+        <a href="#" class="template-btn" onclick="openDemo('warm');return false;">Demo ansehen →</a>
       </div>
     </div>
 
@@ -478,8 +478,15 @@
     });
   }
 
-  function openDemo() {
-    const url = 'https://ordi-template.onrender.com?color=' + encodeURIComponent(_selectedColor) + '&font=' + _selectedFont;
+  var DEMO_URLS = {
+    classic: 'https://ordi-template.onrender.com',
+    minimal: 'https://ordi-minimal.onrender.com',
+    warm:    'https://ordi-bold.onrender.com',
+  };
+
+  function openDemo(template) {
+    var base = DEMO_URLS[template || 'classic'];
+    var url = base + '?color=' + encodeURIComponent(_selectedColor) + '&font=' + _selectedFont;
     window.open(url, '_blank');
   }
 
