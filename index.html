@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Website Templates · Ordination</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Inter', sans-serif; font-weight: 300; background: #faf7f4; color: #2a2320; min-height: 100vh; }
@@ -263,22 +263,21 @@
     <div class="template-card" style="cursor:default">
       <div class="template-preview preview-classic">
         <div class="nav-bar">
-          <div class="nav-bar-dot" style="background:#b85c6e"></div>
+          <div class="nav-bar-dot" id="preview-accent" style="background:#b85c6e"></div>
           <div class="nav-bar-dot" style="background:#e8ddd8"></div>
           <div class="nav-bar-dot" style="background:#e8ddd8"></div>
         </div>
         <div class="hero-mock">
           <div class="hero-mock-left">
-            <div class="mock-label" id="preview-accent"></div>
-            <div class="mock-h1"></div>
-            <div class="mock-h1-2"></div>
-            <div class="mock-sub"></div>
+            <div class="mock-label" id="preview-label" style="background:#b85c6e"></div>
+            <div class="mock-h1" id="preview-h1-font" style="font-family:'Cormorant Garamond',serif;font-size:11px;font-weight:300;color:#2a2320;background:none;height:auto;line-height:1.2">Frauenheilkunde<br>mit Erfahrung</div>
+            <div class="mock-sub" style="margin-top:4px"></div>
             <div class="mock-sub-2"></div>
-            <div class="mock-btn" id="preview-btn"></div>
+            <div class="mock-btn" id="preview-btn" style="background:#b85c6e"></div>
           </div>
           <div class="hero-mock-right">
             <div class="mock-card">
-              <div class="mock-card-line accent" id="preview-card-accent"></div>
+              <div class="mock-card-line" id="preview-card-accent" style="background:#b85c6e;width:50%"></div>
               <div class="mock-card-line"></div>
               <div class="mock-card-line"></div>
               <div class="mock-card-line" style="width:40%"></div>
@@ -296,18 +295,36 @@
           <span class="template-tag">Google Maps</span>
           <span class="template-tag">Impressum</span>
         </div>
-        <div class="color-row">
-          <span class="color-label">Farbe:</span>
-          <div class="color-dot active" style="background:#b85c6e" data-color="#b85c6e" data-dark="#8a3f51" data-light="#f7eef0" data-mist="#fdf5f6" onclick="previewColor(this)" title="Rose"></div>
-          <div class="color-dot" style="background:#2d6a4f" data-color="#2d6a4f" data-dark="#1a4a35" data-light="#ecf5f0" data-mist="#f4faf7" onclick="previewColor(this)" title="Grün"></div>
-          <div class="color-dot" style="background:#1d4e89" data-color="#1d4e89" data-dark="#0f3060" data-light="#e8f0fa" data-mist="#f2f6fc" onclick="previewColor(this)" title="Blau"></div>
-          <div class="color-dot" style="background:#6b3fa0" data-color="#6b3fa0" data-dark="#4a2870" data-light="#f0eaf8" data-mist="#f8f4fc" onclick="previewColor(this)" title="Violett"></div>
-          <div class="color-dot" style="background:#c47c2b" data-color="#c47c2b" data-dark="#8a5510" data-light="#faf0e0" data-mist="#fdf8f0" onclick="previewColor(this)" title="Gold"></div>
+
+        <!-- FARBE -->
+        <div style="margin-top:1rem">
+          <div style="font-size:0.68rem;color:#9a8e8a;margin-bottom:0.5rem;letter-spacing:0.06em;text-transform:uppercase">Akzentfarbe wählen</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <div class="color-dot active" style="background:#b85c6e" data-color="#b85c6e" onclick="previewColor(this)" title="Rose"></div>
+            <div class="color-dot" style="background:#2d6a4f" data-color="#2d6a4f" onclick="previewColor(this)" title="Waldgrün"></div>
+            <div class="color-dot" style="background:#1d4e89" data-color="#1d4e89" onclick="previewColor(this)" title="Marineblau"></div>
+            <div class="color-dot" style="background:#6b3fa0" data-color="#6b3fa0" onclick="previewColor(this)" title="Violett"></div>
+            <div class="color-dot" style="background:#c47c2b" data-color="#c47c2b" onclick="previewColor(this)" title="Gold"></div>
+            <div class="color-dot" style="background:#c0392b" data-color="#c0392b" onclick="previewColor(this)" title="Rot"></div>
+            <div class="color-dot" style="background:#16a085" data-color="#16a085" onclick="previewColor(this)" title="Türkis"></div>
+            <div class="color-dot" style="background:#2c3e50" data-color="#2c3e50" onclick="previewColor(this)" title="Dunkelblau"></div>
+          </div>
         </div>
+
+        <!-- SCHRIFT -->
+        <div style="margin-top:1rem">
+          <div style="font-size:0.68rem;color:#9a8e8a;margin-bottom:0.5rem;letter-spacing:0.06em;text-transform:uppercase">Schriftart wählen</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <button class="font-btn active" data-font="classic" onclick="previewFont(this)" style="font-family:'Cormorant Garamond',serif;font-size:0.85rem;padding:4px 10px;border:1px solid #b85c6e;border-radius:3px;background:#fdf5f6;color:#b85c6e;cursor:pointer">Classic</button>
+            <button class="font-btn" data-font="modern" onclick="previewFont(this)" style="font-family:'Playfair Display',serif;font-size:0.85rem;padding:4px 10px;border:1px solid #e8ddd8;border-radius:3px;background:#fff;color:#5a4e4a;cursor:pointer">Modern</button>
+            <button class="font-btn" data-font="clean" onclick="previewFont(this)" style="font-family:'Libre Baskerville',serif;font-size:0.85rem;padding:4px 10px;border:1px solid #e8ddd8;border-radius:3px;background:#fff;color:#5a4e4a;cursor:pointer">Clean</button>
+          </div>
+        </div>
+
       </div>
       <div class="template-footer">
         <span class="template-status">Verfügbar</span>
-        <a href="https://ordi-template.onrender.com" class="template-btn" target="_blank">Demo ansehen →</a>
+        <a href="#" id="demo-link" class="template-btn" target="_blank" rel="noopener noreferrer" onclick="openDemo()">Demo ansehen →</a>
       </div>
     </div>
 
@@ -387,15 +404,65 @@
 </footer>
 
 <script>
-  // Live color preview
+  var _selectedColor = '#b85c6e';
+  var _selectedFont = 'classic';
+
+  var FONT_FAMILIES = {
+    classic: "'Cormorant Garamond', serif",
+    modern:  "'Playfair Display', serif",
+    clean:   "'Libre Baskerville', serif"
+  };
+
   function previewColor(el) {
-    document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+    document.querySelectorAll('.color-dot').forEach(d => {
+      d.classList.remove('active');
+      d.style.border = '2px solid transparent';
+    });
     el.classList.add('active');
-    const color = el.dataset.color;
-    document.getElementById('preview-accent').style.background = color;
-    document.getElementById('preview-btn').style.background = color;
-    document.getElementById('preview-card-accent').style.background = color;
+    el.style.border = '2px solid #2a2320';
+    _selectedColor = el.dataset.color;
+    updatePreview();
   }
+
+  function previewFont(el) {
+    document.querySelectorAll('.font-btn').forEach(b => {
+      b.style.border = '1px solid #e8ddd8';
+      b.style.background = '#fff';
+      b.style.color = '#5a4e4a';
+    });
+    el.style.border = '1px solid ' + _selectedColor;
+    el.style.background = _selectedColor + '15';
+    el.style.color = _selectedColor;
+    _selectedFont = el.dataset.font;
+    updatePreview();
+  }
+
+  function updatePreview() {
+    // Color preview
+    document.getElementById('preview-accent').style.background = _selectedColor;
+    document.getElementById('preview-label').style.background = _selectedColor;
+    document.getElementById('preview-btn').style.background = _selectedColor;
+    document.getElementById('preview-card-accent').style.background = _selectedColor;
+
+    // Font preview
+    const fontFamily = FONT_FAMILIES[_selectedFont] || FONT_FAMILIES.classic;
+    document.getElementById('preview-h1-font').style.fontFamily = fontFamily;
+
+    // Update active font button border color
+    document.querySelectorAll('.font-btn.active, .font-btn[style*="' + _selectedColor + '"]').forEach(b => {
+      b.style.border = '1px solid ' + _selectedColor;
+      b.style.background = _selectedColor + '15';
+      b.style.color = _selectedColor;
+    });
+  }
+
+  function openDemo() {
+    const url = 'https://ordi-template.onrender.com?color=' + encodeURIComponent(_selectedColor) + '&font=' + _selectedFont;
+    window.open(url, '_blank');
+  }
+
+  // Init
+  updatePreview();
 </script>
 </body>
 </html>
