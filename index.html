@@ -474,6 +474,12 @@
 </footer>
 
 <script>
+  // State pro Template-Karte
+  var _state = {
+    classic: { color: '#b85c6e', font: 'classic' },
+    minimal: { color: '#b85c6e', font: 'classic' },
+    warm:    { color: '#b85c6e', font: 'classic' },
+  };
   var _selectedColor = '#b85c6e';
   var _selectedFont = 'classic';
 
@@ -483,29 +489,39 @@
     clean:   "'Libre Baskerville', serif"
   };
 
+  function getTemplate(el) {
+    var btn = el.closest('.template-footer, .template-info');
+    if (!btn) btn = el.closest('.template-card');
+    var demoBtn = btn ? btn.querySelector('[onclick*="openDemo"]') : null;
+    if (!demoBtn) return 'classic';
+    var m = demoBtn.getAttribute('onclick').match(/openDemo\('(\w+)'\)/);
+    return m ? m[1] : 'classic';
+  }
+
   function previewColor(el) {
-    // Only reset dots within the same card
     var card = el.closest('.template-card');
+    var tpl = getTemplate(el);
     card.querySelectorAll('.color-dot').forEach(d => {
       d.classList.remove('active');
       d.style.border = '2px solid transparent';
     });
     el.classList.add('active');
     el.style.border = '2px solid #2a2320';
+    _state[tpl].color = el.dataset.color;
     _selectedColor = el.dataset.color;
-    updatePreview();
-    // Update font button borders in same card
-    card.querySelectorAll('.font-btn').forEach(b => {
-      if (b.classList.contains('active')) {
-        b.style.border = '1px solid ' + _selectedColor;
-        b.style.background = _selectedColor + '15';
-        b.style.color = _selectedColor;
-      }
+    if (tpl === 'classic') updatePreview();
+    // Update font btn colors
+    card.querySelectorAll('.font-btn.active').forEach(b => {
+      b.style.border = '1px solid ' + el.dataset.color;
+      b.style.background = el.dataset.color + '15';
+      b.style.color = el.dataset.color;
     });
   }
 
   function previewFont(el) {
     var card = el.closest('.template-card');
+    var tpl = getTemplate(el);
+    var color = _state[tpl].color;
     card.querySelectorAll('.font-btn').forEach(b => {
       b.style.border = '1px solid #e8ddd8';
       b.style.background = '#fff';
@@ -513,11 +529,12 @@
       b.classList.remove('active');
     });
     el.classList.add('active');
-    el.style.border = '1px solid ' + _selectedColor;
-    el.style.background = _selectedColor + '15';
-    el.style.color = _selectedColor;
+    el.style.border = '1px solid ' + color;
+    el.style.background = color + '15';
+    el.style.color = color;
+    _state[tpl].font = el.dataset.font;
     _selectedFont = el.dataset.font;
-    updatePreview();
+    if (tpl === 'classic') updatePreview();
   }
 
   function updatePreview() {
@@ -546,8 +563,10 @@
   };
 
   function openDemo(template) {
-    var base = DEMO_URLS[template || 'classic'];
-    var url = base + '?color=' + encodeURIComponent(_selectedColor) + '&font=' + _selectedFont;
+    var tpl = template || 'classic';
+    var base = DEMO_URLS[tpl];
+    var state = _state[tpl] || { color: '#b85c6e', font: 'classic' };
+    var url = base + '?color=' + encodeURIComponent(state.color) + '&font=' + state.font;
     window.open(url, '_blank');
   }
 
