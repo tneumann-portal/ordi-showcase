@@ -484,7 +484,9 @@
   };
 
   function previewColor(el) {
-    document.querySelectorAll('.color-dot').forEach(d => {
+    // Only reset dots within the same card
+    var card = el.closest('.template-card');
+    card.querySelectorAll('.color-dot').forEach(d => {
       d.classList.remove('active');
       d.style.border = '2px solid transparent';
     });
@@ -492,14 +494,25 @@
     el.style.border = '2px solid #2a2320';
     _selectedColor = el.dataset.color;
     updatePreview();
+    // Update font button borders in same card
+    card.querySelectorAll('.font-btn').forEach(b => {
+      if (b.classList.contains('active')) {
+        b.style.border = '1px solid ' + _selectedColor;
+        b.style.background = _selectedColor + '15';
+        b.style.color = _selectedColor;
+      }
+    });
   }
 
   function previewFont(el) {
-    document.querySelectorAll('.font-btn').forEach(b => {
+    var card = el.closest('.template-card');
+    card.querySelectorAll('.font-btn').forEach(b => {
       b.style.border = '1px solid #e8ddd8';
       b.style.background = '#fff';
       b.style.color = '#5a4e4a';
+      b.classList.remove('active');
     });
+    el.classList.add('active');
     el.style.border = '1px solid ' + _selectedColor;
     el.style.background = _selectedColor + '15';
     el.style.color = _selectedColor;
