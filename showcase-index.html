@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Templates · Ordination</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; font-weight: 300; background: #faf7f4; color: #2a2320; min-height: 100vh; }
+
+  header {
+    background: #fff;
+    border-bottom: 1px solid #e8ddd8;
+    padding: 0 6vw;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #2a2320;
+  }
+  .logo span { color: #b85c6e; }
+  .header-sub { font-size: 0.75rem; color: #9a8e8a; letter-spacing: 0.08em; }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 5rem 4vw; }
+
+  .intro { text-align: center; margin-bottom: 5rem; }
+  .intro-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #b85c6e;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .intro h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: #2a2320;
+    margin-bottom: 1.2rem;
+  }
+  .intro p { font-size: 0.95rem; color: #5a4e4a; max-width: 50ch; margin: 0 auto; line-height: 1.8; }
+
+  .templates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .template-card {
+    background: #fff;
+    border: 1px solid #e8ddd8;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+  .template-card:hover {
+    box-shadow: 0 8px 40px rgba(42,35,32,0.1);
+    transform: translateY(-2px);
+  }
+
+  .template-preview {
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Classic Preview */
+  .preview-classic {
+    background: #faf7f4;
+  }
+  .preview-classic .nav-bar {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 28px; background: rgba(255,255,255,0.95);
+    border-bottom: 0.5px solid #e8ddd8;
+    display: flex; align-items: center; padding: 0 16px;
+    gap: 8px;
+  }
+  .nav-bar-dot { width: 5px; height: 5px; border-radius: 50%; }
+  .preview-classic .hero-mock {
+    display: grid; grid-template-columns: 1fr 1fr;
+    width: 100%; height: 100%; padding-top: 28px;
+  }
+  .hero-mock-left {
+    background: #faf7f4; padding: 20px 16px;
+    display: flex; flex-direction: column; gap: 8px;
+    justify-content: center;
+  }
+  .mock-label { width: 60px; height: 4px; background: #b85c6e; border-radius: 2px; }
+  .mock-h1 { width: 90%; height: 8px; background: #2a2320; border-radius: 2px; opacity: 0.8; }
+  .mock-h1-2 { width: 70%; height: 8px; background: #2a2320; border-radius: 2px; opacity: 0.8; }
+  .mock-sub { width: 85%; height: 4px; background: #9a8e8a; border-radius: 2px; }
+  .mock-sub-2 { width: 65%; height: 4px; background: #9a8e8a; border-radius: 2px; }
+  .mock-btn { width: 80px; height: 20px; background: #b85c6e; border-radius: 2px; margin-top: 4px; }
+  .hero-mock-right {
+    background: #fdf5f6; padding: 20px 16px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .mock-card { background: #fff; border-radius: 4px; padding: 10px; border: 0.5px solid #e8ddd8; }
+  .mock-card-line { height: 4px; background: #e8ddd8; border-radius: 2px; margin-bottom: 5px; }
+  .mock-card-line.accent { background: #b85c6e; width: 50%; }
+
+  /* Coming soon cards */
+  .preview-minimal { background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); }
+  .preview-bold { background: linear-gradient(135deg, #2a2320 0%, #4a3f3a 100%); }
+  .coming-soon {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    background: rgba(0,0,0,0.2);
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+  }
+  .coming-soon-dark {
+    color: #9a8e8a;
+    background: rgba(0,0,0,0.06);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+  }
+
+  .template-info { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
+  .template-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #2a2320;
+  }
+  .template-desc { font-size: 0.82rem; color: #5a4e4a; line-height: 1.7; }
+  .template-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.5rem; }
+  .template-tag {
+    font-size: 0.68rem;
+    border: 0.5px solid #e8ddd8;
+    border-radius: 3px;
+    padding: 0.2rem 0.5rem;
+    color: #9a8e8a;
+  }
+  .template-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #e8ddd8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .template-status {
+    font-size: 0.72rem;
+    color: #22c55e;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .template-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #22c55e; }
+  .template-status.soon { color: #9a8e8a; }
+  .template-status.soon::before { background: #d1d5db; }
+  .template-btn {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #b85c6e;
+    border: 0.5px solid #b85c6e;
+    border-radius: 2px;
+    padding: 0.35rem 0.8rem;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .template-btn:hover { background: #b85c6e; color: #fff; }
+  .template-btn.disabled { color: #d1d5db; border-color: #e8ddd8; pointer-events: none; }
+
+  /* Color picker demo */
+  .color-row {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+    align-items: center;
+  }
+  .color-dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+  .color-dot:hover { transform: scale(1.2); }
+  .color-dot.active { border-color: #2a2320; }
+  .color-label { font-size: 0.68rem; color: #9a8e8a; margin-left: 4px; }
+
+  .how-section { margin-top: 6rem; padding-top: 5rem; border-top: 1px solid #e8ddd8; }
+  .how-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+  .how-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 2rem; }
+  .how-step {
+    padding: 1.5rem;
+    background: #fff;
+    border: 1px solid #e8ddd8;
+    border-radius: 8px;
+  }
+  .how-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: #b85c6e;
+    opacity: 0.4;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+  .how-step-title { font-size: 0.9rem; font-weight: 500; color: #2a2320; margin-bottom: 0.5rem; }
+  .how-step-body { font-size: 0.8rem; color: #9a8e8a; line-height: 1.7; }
+
+  footer {
+    text-align: center;
+    padding: 3rem;
+    font-size: 0.75rem;
+    color: #9a8e8a;
+    border-top: 1px solid #e8ddd8;
+    margin-top: 5rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Ordination <span>Templates</span></div>
+  <div class="header-sub">Professionelle Websites für Arztpraxen</div>
+</header>
+
+<main>
+  <div class="intro">
+    <span class="intro-label">Template-Auswahl</span>
+    <h1>Moderne Websites<br>für Ihre Ordination.</h1>
+    <p>Wählen Sie ein Template, passen Sie Farbe und Inhalte an – fertig. Hosting, Wartung und Updates inklusive.</p>
+  </div>
+
+  <div class="templates-grid">
+
+    <!-- CLASSIC -->
+    <div class="template-card" style="cursor:default">
+      <div class="template-preview preview-classic">
+        <div class="nav-bar">
+          <div class="nav-bar-dot" style="background:#b85c6e"></div>
+          <div class="nav-bar-dot" style="background:#e8ddd8"></div>
+          <div class="nav-bar-dot" style="background:#e8ddd8"></div>
+        </div>
+        <div class="hero-mock">
+          <div class="hero-mock-left">
+            <div class="mock-label" id="preview-accent"></div>
+            <div class="mock-h1"></div>
+            <div class="mock-h1-2"></div>
+            <div class="mock-sub"></div>
+            <div class="mock-sub-2"></div>
+            <div class="mock-btn" id="preview-btn"></div>
+          </div>
+          <div class="hero-mock-right">
+            <div class="mock-card">
+              <div class="mock-card-line accent" id="preview-card-accent"></div>
+              <div class="mock-card-line"></div>
+              <div class="mock-card-line"></div>
+              <div class="mock-card-line" style="width:40%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="template-info">
+        <div class="template-name">Classic</div>
+        <div class="template-desc">Elegantes zweispaltiges Layout mit Zeitkarte, Grid-Leistungen und Teambereich. Ideal für Facharztpraxen.</div>
+        <div class="template-tags">
+          <span class="template-tag">Zweispaltig</span>
+          <span class="template-tag">Dreisprachig</span>
+          <span class="template-tag">Portal-Integration</span>
+          <span class="template-tag">Google Maps</span>
+          <span class="template-tag">Impressum</span>
+        </div>
+        <div class="color-row">
+          <span class="color-label">Farbe:</span>
+          <div class="color-dot active" style="background:#b85c6e" data-color="#b85c6e" data-dark="#8a3f51" data-light="#f7eef0" data-mist="#fdf5f6" onclick="previewColor(this)" title="Rose"></div>
+          <div class="color-dot" style="background:#2d6a4f" data-color="#2d6a4f" data-dark="#1a4a35" data-light="#ecf5f0" data-mist="#f4faf7" onclick="previewColor(this)" title="Grün"></div>
+          <div class="color-dot" style="background:#1d4e89" data-color="#1d4e89" data-dark="#0f3060" data-light="#e8f0fa" data-mist="#f2f6fc" onclick="previewColor(this)" title="Blau"></div>
+          <div class="color-dot" style="background:#6b3fa0" data-color="#6b3fa0" data-dark="#4a2870" data-light="#f0eaf8" data-mist="#f8f4fc" onclick="previewColor(this)" title="Violett"></div>
+          <div class="color-dot" style="background:#c47c2b" data-color="#c47c2b" data-dark="#8a5510" data-light="#faf0e0" data-mist="#fdf8f0" onclick="previewColor(this)" title="Gold"></div>
+        </div>
+      </div>
+      <div class="template-footer">
+        <span class="template-status">Verfügbar</span>
+        <a href="https://ordi-template.onrender.com" class="template-btn" target="_blank" rel="noopener noreferrer">Demo ansehen →</a>
+      </div>
+    </div>
+
+    <!-- MINIMAL -->
+    <div class="template-card">
+      <div class="template-preview preview-minimal">
+        <span class="coming-soon-dark">Demnächst verfügbar</span>
+      </div>
+      <div class="template-info">
+        <div class="template-name">Minimal</div>
+        <div class="template-desc">Reduziertes, zentriertes Layout für Ordinationen die auf klare Botschaft setzen. Weniger ist mehr.</div>
+        <div class="template-tags">
+          <span class="template-tag">Zentriert</span>
+          <span class="template-tag">Minimalistisch</span>
+          <span class="template-tag">Schnell</span>
+        </div>
+      </div>
+      <div class="template-footer">
+        <span class="template-status soon">In Entwicklung</span>
+        <span class="template-btn disabled">Bald verfügbar</span>
+      </div>
+    </div>
+
+    <!-- BOLD -->
+    <div class="template-card">
+      <div class="template-preview preview-bold">
+        <span class="coming-soon">Demnächst verfügbar</span>
+      </div>
+      <div class="template-info">
+        <div class="template-name">Bold</div>
+        <div class="template-desc">Modernes, kraftvolles Design mit großem Vollbild-Hero. Für Ordinationen die auffallen wollen.</div>
+        <div class="template-tags">
+          <span class="template-tag">Vollbild</span>
+          <span class="template-tag">Modern</span>
+          <span class="template-tag">Mutig</span>
+        </div>
+      </div>
+      <div class="template-footer">
+        <span class="template-status soon">In Entwicklung</span>
+        <span class="template-btn disabled">Bald verfügbar</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="how-section">
+    <h2 class="how-title">So einfach geht's.</h2>
+    <div class="how-grid">
+      <div class="how-step">
+        <div class="how-number">1</div>
+        <div class="how-step-title">Template wählen</div>
+        <div class="how-step-body">Classic, Minimal oder Bold – je nach Stil der Ordination.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-number">2</div>
+        <div class="how-step-title">Farbe & Inhalte</div>
+        <div class="how-step-body">Akzentfarbe, Ärzte, Leistungen, Zeiten – alles in einer Konfigurationsdatei.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-number">3</div>
+        <div class="how-step-title">Domain verknüpfen</div>
+        <div class="how-step-body">Bestehende Domain bleibt – wir leiten sie auf die neue Website um.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-number">4</div>
+        <div class="how-step-title">Live & fertig</div>
+        <div class="how-step-body">Hosting, SSL, Wartung – alles inklusive. Sie kümmern sich um Ihre Patienten.</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  © 2026 · Professionelle Websites für Ordinationen · Alle Templates dreisprachig & DSGVO-konform
+</footer>
+
+<script>
+  // Live color preview
+  function previewColor(el) {
+    document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+    el.classList.add('active');
+    const color = el.dataset.color;
+    document.getElementById('preview-accent').style.background = color;
+    document.getElementById('preview-btn').style.background = color;
+    document.getElementById('preview-card-accent').style.background = color;
+  }
+</script>
+</body>
+</html>
