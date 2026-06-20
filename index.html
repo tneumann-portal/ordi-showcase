@@ -260,7 +260,7 @@
   <div class="templates-grid">
 
     <!-- CLASSIC -->
-    <div class="template-card" style="cursor:default">
+    <div class="template-card" data-template="classic" style="cursor:default">
       <div class="template-preview preview-classic">
         <div class="nav-bar">
           <div class="nav-bar-dot" id="preview-accent" style="background:#b85c6e"></div>
@@ -329,7 +329,7 @@
     </div>
 
     <!-- MINIMAL -->
-    <div class="template-card">
+    <div class="template-card" data-template="minimal">
       <div class="template-preview preview-minimal" style="background:#faf8f6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:20px">
         <div style="font-family:'DM Serif Display',serif;font-size:22px;color:#1a1614;text-align:center;line-height:1.1">Frauenheilkunde<br><em style="color:#b85c6e">mit Herz.</em></div>
         <div style="width:40px;height:1px;background:#ede8e4"></div>
@@ -377,7 +377,7 @@
     </div>
 
     <!-- WARM -->
-    <div class="template-card" style="cursor:default">
+    <div class="template-card" data-template="warm" style="cursor:default">
       <div class="template-preview" style="background:linear-gradient(135deg,#faf6f0 0%,#e8dcc8 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px">
         <div style="width:100%;background:rgba(255,255,255,0.7);border-radius:12px;padding:14px;border:1px solid #e2d5c4">
           <div style="font-family:'Lora',serif;font-size:13px;font-style:italic;color:#2e2620;margin-bottom:6px">Ordination <em style="color:#b85c6e">Dr. Neumann</em></div>
@@ -490,12 +490,8 @@
   };
 
   function getTemplate(el) {
-    var btn = el.closest('.template-footer, .template-info');
-    if (!btn) btn = el.closest('.template-card');
-    var demoBtn = btn ? btn.querySelector('[onclick*="openDemo"]') : null;
-    if (!demoBtn) return 'classic';
-    var m = demoBtn.getAttribute('onclick').match(/openDemo\('(\w+)'\)/);
-    return m ? m[1] : 'classic';
+    var card = el.closest('[data-template]');
+    return card ? card.dataset.template : 'classic';
   }
 
   function previewColor(el) {
